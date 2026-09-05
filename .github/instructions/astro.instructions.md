@@ -38,6 +38,7 @@ const games = await getAllGames(getDatabase());
 - Use `<slot />` for content injection
 - Include common elements: `<head>`, navigation, footer
 - Import global styles in layouts
+- Document every reusable component's `Props` interface with a short TSDoc comment describing its public contract and meaningful prop constraints.
 
 ### Layout Example
 
@@ -110,7 +111,9 @@ There is no Svelte/React layer. When a page genuinely needs client behaviour, ad
 
 - Use TypeScript for type-safe props
 - Define `Props` interface in frontmatter
+- Add a TSDoc comment directly above each reusable component's `Props` interface. Describe what the component renders and the meaning of each prop; do not repeat obvious type syntax.
 - Type component imports and helper return values
+- Follow the shared formatting rules: four-space indentation, single quotes, semicolons, trailing commas in multiline lists, and spaces inside object braces.
 - Run `npx astro sync` to (re)generate route/content types before linting or type-checking
 - `.astro` files are type-checked by `npm run typecheck:astro` (which runs `astro sync` then `astro check`), on the classic `typescript` package. The pure TypeScript in `db/`, `src/lib/`, and `src/types/` is type-checked separately by `npm run typecheck` (the native TS 7 compiler, `tsgo`), which does **not** process `.astro` files.
 
@@ -119,4 +122,5 @@ There is no Svelte/React layer. When a page genuinely needs client behaviour, ad
 - Keep data fetching in frontmatter (build time); avoid client-side fetching
 - Minimize client-side JavaScript — the default is zero JS shipped
 - Import and use global CSS styles from layouts
+- Comments should explain why a component needs a non-obvious implementation or accessibility choice, not narrate the markup.
 - Always include a `data-testid` on interactive elements (see `ui.instructions.md`)
